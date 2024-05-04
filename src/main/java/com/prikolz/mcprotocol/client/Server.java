@@ -1,8 +1,9 @@
-package com.prikolz;
+package com.prikolz.mcprotocol.client;
+
+import com.prikolz.mcprotocol.client.Client;
 
 import java.io.*;
 import java.net.*;
-import java.util.Arrays;
 
 public class Server {
 

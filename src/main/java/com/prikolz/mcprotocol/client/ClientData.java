@@ -1,4 +1,4 @@
-package com.prikolz.client;
+package com.prikolz.mcprotocol.client;
 
 public class ClientData {
     public int protocol;

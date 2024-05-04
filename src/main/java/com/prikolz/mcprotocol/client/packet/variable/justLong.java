@@ -1,4 +1,4 @@
-package com.prikolz.packet.variable;
+package com.prikolz.mcprotocol.client.packet.variable;
 
 public class justLong implements Var {
     public final long value;

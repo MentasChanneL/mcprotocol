@@ -1,8 +1,8 @@
-package com.prikolz.packet.types.clientbound;
+package com.prikolz.mcprotocol.client.packet.types.clientbound;
 
-import com.prikolz.packet.ClientboundPacket;
-import com.prikolz.packet.variable.justByte;
-import com.prikolz.packet.variable.justLong;
+import com.prikolz.mcprotocol.client.packet.ClientboundPacket;
+import com.prikolz.mcprotocol.client.packet.variable.justByte;
+import com.prikolz.mcprotocol.client.packet.variable.justLong;
 
 public class ClientboundStatusPingResponse extends ClientboundPacket {
     public ClientboundStatusPingResponse(long key) {

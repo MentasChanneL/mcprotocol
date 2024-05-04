@@ -1,12 +1,12 @@
-package com.prikolz.packet.handlers;
+package com.prikolz.mcprotocol.client.packet.handlers;
 
-import com.prikolz.Client;
-import com.prikolz.packet.ServerboundPacket;
-import com.prikolz.packet.types.clientbound.ClientboundStatusPingResponse;
-import com.prikolz.packet.types.clientbound.ClientboundStatusResponse;
-import com.prikolz.packet.types.serverbound.ServerboundHandShake;
-import com.prikolz.packet.types.serverbound.ServerboundStatusPingRequest;
-import com.prikolz.packet.types.serverbound.ServerboundStatusRequest;
+import com.prikolz.mcprotocol.client.Client;
+import com.prikolz.mcprotocol.client.packet.ServerboundPacket;
+import com.prikolz.mcprotocol.client.packet.types.clientbound.ClientboundStatusPingResponse;
+import com.prikolz.mcprotocol.client.packet.types.clientbound.ClientboundStatusResponse;
+import com.prikolz.mcprotocol.client.packet.types.serverbound.ServerboundStatusPingRequest;
+import com.prikolz.mcprotocol.client.packet.types.serverbound.ServerboundStatusRequest;
+import com.prikolz.mcprotocol.client.packet.types.serverbound.ServerboundHandShake;
 
 import java.io.IOException;
 

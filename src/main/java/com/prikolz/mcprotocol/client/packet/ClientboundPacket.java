@@ -1,15 +1,13 @@
-package com.prikolz.packet;
+package com.prikolz.mcprotocol.client.packet;
 
-import com.prikolz.packet.variable.Var;
-import com.prikolz.packet.variable.VarInt;
-
-import java.util.Arrays;
+import com.prikolz.mcprotocol.client.packet.variable.Var;
+import com.prikolz.mcprotocol.client.packet.variable.VarInt;
 
 public class ClientboundPacket {
 
     public byte[] bytes;
 
-    public static byte[] createPacket(Var ... vars) {
+    public static byte[] createPacket(Var... vars) {
         int totalLength = 0;
         for (Var var : vars) {
             totalLength += var.getBytes().length;

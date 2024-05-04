@@ -1,8 +1,8 @@
-package com.prikolz.packet.types.clientbound;
+package com.prikolz.mcprotocol.client.packet.types.clientbound;
 
-import com.prikolz.packet.ClientboundPacket;
-import com.prikolz.packet.variable.justByte;
-import com.prikolz.packet.variable.VarString;
+import com.prikolz.mcprotocol.client.packet.variable.VarString;
+import com.prikolz.mcprotocol.client.packet.variable.justByte;
+import com.prikolz.mcprotocol.client.packet.ClientboundPacket;
 
 public class ClientboundStatusResponse extends ClientboundPacket {
     public ClientboundStatusResponse(String jsonStatus) {

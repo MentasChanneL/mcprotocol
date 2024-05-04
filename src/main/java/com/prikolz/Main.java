@@ -1,7 +1,8 @@
 package com.prikolz;
 
+import com.prikolz.mcprotocol.client.Server;
+
 import java.io.IOException;
-import java.util.HashMap;
 
 public class Main {
 

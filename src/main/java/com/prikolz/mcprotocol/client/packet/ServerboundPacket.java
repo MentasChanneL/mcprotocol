@@ -1,4 +1,4 @@
-package com.prikolz.packet;
+package com.prikolz.mcprotocol.client.packet;
 
 public class ServerboundPacket {
     public final int length;

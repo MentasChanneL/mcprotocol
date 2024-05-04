@@ -1,6 +1,4 @@
-package com.prikolz.client;
-
-import com.prikolz.Client;
+package com.prikolz.mcprotocol.client;
 
 public class ClientRunnable implements Runnable{
 

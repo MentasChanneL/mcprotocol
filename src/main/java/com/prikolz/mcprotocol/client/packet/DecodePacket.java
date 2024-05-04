@@ -1,9 +1,9 @@
-package com.prikolz.packet;
+package com.prikolz.mcprotocol.client.packet;
 
-import com.prikolz.Client;
-import com.prikolz.packet.types.serverbound.ServerboundHandShake;
-import com.prikolz.packet.types.serverbound.ServerboundStatusPingRequest;
-import com.prikolz.packet.types.serverbound.ServerboundStatusRequest;
+import com.prikolz.mcprotocol.client.Client;
+import com.prikolz.mcprotocol.client.packet.types.serverbound.ServerboundHandShake;
+import com.prikolz.mcprotocol.client.packet.types.serverbound.ServerboundStatusPingRequest;
+import com.prikolz.mcprotocol.client.packet.types.serverbound.ServerboundStatusRequest;
 
 import java.io.DataInputStream;
 import java.io.IOException;

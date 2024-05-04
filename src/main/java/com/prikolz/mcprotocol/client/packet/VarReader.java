@@ -1,4 +1,4 @@
-package com.prikolz.packet;
+package com.prikolz.mcprotocol.client.packet;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

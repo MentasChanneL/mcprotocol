@@ -1,6 +1,6 @@
-package com.prikolz.packet.types.serverbound;
+package com.prikolz.mcprotocol.client.packet.types.serverbound;
 
-import com.prikolz.packet.ServerboundPacket;
+import com.prikolz.mcprotocol.client.packet.ServerboundPacket;
 
 public class ServerboundStatusRequest extends ServerboundPacket {
     public ServerboundStatusRequest(int length) {
