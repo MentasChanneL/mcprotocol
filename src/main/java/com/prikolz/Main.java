@@ -1,6 +1,6 @@
 package com.prikolz;
 
-import com.prikolz.mcprotocol.client.Server;
+import com.prikolz.mcprotocol.Server;
 
 import java.io.IOException;
 

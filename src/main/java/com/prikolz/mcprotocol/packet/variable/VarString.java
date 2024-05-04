@@ -1,4 +1,4 @@
-package com.prikolz.mcprotocol.client.packet.variable;
+package com.prikolz.mcprotocol.packet.variable;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;

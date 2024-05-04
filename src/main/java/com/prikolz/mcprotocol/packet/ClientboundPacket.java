@@ -1,7 +1,7 @@
-package com.prikolz.mcprotocol.client.packet;
+package com.prikolz.mcprotocol.packet;
 
-import com.prikolz.mcprotocol.client.packet.variable.Var;
-import com.prikolz.mcprotocol.client.packet.variable.VarInt;
+import com.prikolz.mcprotocol.packet.variable.Var;
+import com.prikolz.mcprotocol.packet.variable.VarInt;
 
 public class ClientboundPacket {
 

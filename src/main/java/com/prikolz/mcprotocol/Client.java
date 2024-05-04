@@ -1,10 +1,12 @@
-package com.prikolz.mcprotocol.client;
+package com.prikolz.mcprotocol;
 
-import com.prikolz.mcprotocol.client.packet.ClientboundPacket;
-import com.prikolz.mcprotocol.client.packet.DecodePacket;
-import com.prikolz.mcprotocol.client.packet.ServerboundPacket;
-import com.prikolz.mcprotocol.client.packet.handlers.DefaultPacketHandler;
-import com.prikolz.mcprotocol.client.packet.listeners.DefaultPacketListener;
+import com.prikolz.mcprotocol.client.ClientData;
+import com.prikolz.mcprotocol.client.ClientRunnable;
+import com.prikolz.mcprotocol.packet.ClientboundPacket;
+import com.prikolz.mcprotocol.packet.DecodePacket;
+import com.prikolz.mcprotocol.packet.ServerboundPacket;
+import com.prikolz.mcprotocol.packet.handlers.DefaultPacketHandler;
+import com.prikolz.mcprotocol.packet.listeners.DefaultPacketListener;
 
 import java.io.DataInputStream;
 import java.io.IOException;

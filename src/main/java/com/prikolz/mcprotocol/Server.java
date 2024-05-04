@@ -1,6 +1,6 @@
-package com.prikolz.mcprotocol.client;
+package com.prikolz.mcprotocol;
 
-import com.prikolz.mcprotocol.client.Client;
+import com.prikolz.mcprotocol.Client;
 
 import java.io.*;
 import java.net.*;

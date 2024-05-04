@@ -1,7 +1,7 @@
-package com.prikolz.mcprotocol.client.packet.listeners;
+package com.prikolz.mcprotocol.packet.listeners;
 
-import com.prikolz.mcprotocol.client.packet.ServerboundPacket;
-import com.prikolz.mcprotocol.client.packet.PacketListener;
+import com.prikolz.mcprotocol.packet.ServerboundPacket;
+import com.prikolz.mcprotocol.packet.PacketListener;
 
 import java.net.Socket;
 

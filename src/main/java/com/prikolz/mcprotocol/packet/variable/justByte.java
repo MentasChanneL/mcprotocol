@@ -1,4 +1,4 @@
-package com.prikolz.mcprotocol.client.packet.variable;
+package com.prikolz.mcprotocol.packet.variable;
 
 public class justByte implements Var {
     public final byte value;
