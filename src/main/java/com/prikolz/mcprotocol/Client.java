@@ -65,10 +65,9 @@ public class Client {
                     // Обработка пакетов от клиента
                     while (true) {
                         ServerboundPacket serverboundPacket = DecodePacket.decode(inputStream, this.client);
-                        System.out.println("Новый пакет");
                         if(serverboundPacket == null) continue;
                         DefaultPacketHandler.handle(serverboundPacket, this.client);
-                        listener.packetReceived(serverboundPacket, clientSocket);
+                        listener.packetReceived(serverboundPacket, this.client);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

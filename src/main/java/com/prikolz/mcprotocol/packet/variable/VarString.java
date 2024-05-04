@@ -11,7 +11,6 @@ public class VarString implements Var {
     public VarString(String string) {
         this.string = string.getBytes(StandardCharsets.UTF_8);
         this.VarIntLength = (new VarInt(this.string.length) ).bytes;
-        System.out.println(Arrays.toString(VarIntLength) + this.string.length);
         int lenVarInt = this.VarIntLength.length;
         int lenString = this.string.length;
         this.LengthAndString = new byte[lenVarInt + lenString];
