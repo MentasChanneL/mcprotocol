@@ -7,17 +7,31 @@ import com.prikolz.mcprotocol.packet.types.clientbound.ClientboundStatusPingResp
 import com.prikolz.mcprotocol.packet.types.clientbound.ClientboundStatusResponse;
 import com.prikolz.mcprotocol.packet.types.serverbound.ServerboundStatusPingRequest;
 import com.prikolz.mcprotocol.packet.types.serverbound.ServerboundStatusRequest;
+import com.prikolz.mcprotocol.utils.Base64Encoder;
+import com.prikolz.mcprotocol.utils.ServerStatusConstructor;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class DefaultPacketListener extends PacketListener {
 
     @Override
     public void packetReceived(ServerboundPacket serverboundPacket, Client client) throws IOException {
         if(serverboundPacket instanceof ServerboundStatusRequest) {
-            ClientboundStatusResponse packet = new ClientboundStatusResponse(
-                    "{\"version\": {\"name\": \"1.20.2\",\"protocol\": 764},\"players\": {\"max\": 666,\"online\": 228,\"sample\": [{\"name\": \"§a◦◆ Creative+ ◆◦\",\"id\": \"00000000-0000-0000-0000-000000000000\"},{\"name\": \"Сотни режимов!\",\"id\": \"00000000-0000-0000-0000-000000000001\"},{\"name\": \"Создай свой!\",\"id\": \"00000000-0000-0000-0000-000000000002\"},{\"name\": \"\",\"id\": \"00000000-0000-0000-0000-000000000003\"},{\"name\": \"ну там и остальное че-то\",\"id\": \"00000000-0000-0000-0000-000000000004\"}]},\"description\": {\"text\": \"мега. крутой. сервак для людей с большими яй\"},\"enforcesSecureChat\": false,\"previewsChat\": false}"
-            );
+
+            ServerStatusConstructor constructor = new ServerStatusConstructor("§6Simple §eText", 764, 2147483647, new Random().nextInt(1000), false, false);
+            constructor
+                    .addPlayerSample("")
+                    .addPlayerSample("§6Join on this server!")
+                    .addPlayerSample("")
+                    .addPlayerSample("§a☂ � ◎ ❣ ❤")
+                    .addPlayerSample("§8───────────")
+                    .addPlayerSample("");
+            constructor.setJsonDescription("{\"text\": \"§aServer description\n§fline 2 §c★§e★§9★§b★\"}");
+            constructor.setBase64Icon( Base64Encoder.encodeFileToBase64(new Random().nextInt(5) + 1 + ".png", DefaultPacketListener.class.getClassLoader()) );
+
+            System.out.println( constructor.getJson(true) );
+            ClientboundStatusResponse packet = new ClientboundStatusResponse( constructor.getJson(true) );
             client.sendPacket( packet );
         }
         if(serverboundPacket instanceof ServerboundStatusPingRequest) {
