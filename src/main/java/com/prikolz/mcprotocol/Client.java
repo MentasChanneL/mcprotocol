@@ -7,6 +7,7 @@ import com.prikolz.mcprotocol.packet.DecodePacket;
 import com.prikolz.mcprotocol.packet.ServerboundPacket;
 import com.prikolz.mcprotocol.packet.handlers.DefaultPacketHandler;
 import com.prikolz.mcprotocol.packet.listeners.DefaultPacketListener;
+import com.prikolz.mcprotocol.utils.Logger;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -18,20 +19,22 @@ public class Client {
     public Thread thread;
     public ClientRunnable body;
     public final ClientData data;
+    public final Server server;
 
-    public Client(ClientRunnable run, Socket newSocket) {
+    public Client(ClientRunnable run, Socket newSocket, Server server) {
         this.body = run;
         this.body.client = this;
         this.data = new ClientData();
         this.thread = new Thread(this::run);
         this.clientSocket = newSocket;
         this.thread.start();
+        this.server = server;
     }
 
     public void run() {
         if(!clientIsValid()) {
             this.thread.interrupt();
-            System.out.println("Соединение закрыто");
+            this.server.logger.logInfo("Connection closed " + this.clientSocket.getInetAddress());
             return;
         }
         body.run();
@@ -53,7 +56,7 @@ public class Client {
         out.flush();
     }
 
-    public static Client createDefaultClient(Socket clientSocket) {
+    public static Client createDefaultClient(Socket clientSocket, Server server) {
         DefaultPacketListener listener = new DefaultPacketListener();
 
         ClientRunnable run = new ClientRunnable(){
@@ -71,7 +74,7 @@ public class Client {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.err.println("Ошибка при обработке клиента: " + e.getMessage());
+                    this.client.server.logger.logWarn("Error processing client " + this.client.clientSocket.getInetAddress() + " : " + e.getMessage());
                 } finally {
                     try {
                         clientSocket.close();
@@ -82,7 +85,7 @@ public class Client {
             }
         };
 
-        return new Client(run, clientSocket);
+        return new Client(run, clientSocket, server);
     }
 
 }

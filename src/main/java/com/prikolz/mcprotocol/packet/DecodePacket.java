@@ -2,8 +2,11 @@ package com.prikolz.mcprotocol.packet;
 
 import com.prikolz.mcprotocol.Client;
 import com.prikolz.mcprotocol.packet.types.serverbound.ServerboundHandShake;
+import com.prikolz.mcprotocol.packet.types.serverbound.ServerboundLoginStart;
 import com.prikolz.mcprotocol.packet.types.serverbound.ServerboundStatusPingRequest;
 import com.prikolz.mcprotocol.packet.types.serverbound.ServerboundStatusRequest;
+import com.prikolz.mcprotocol.packet.variable.VarInt;
+import com.prikolz.mcprotocol.packet.variable.VarString;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 public abstract class DecodePacket {
     public static ServerboundPacket decode(DataInputStream input, Client client) throws IOException {
-        int packetLength = VarReader.readVarInt(input);
+        int packetLength = VarInt.readVarInt(input).getInt();
         byte packetId = input.readByte();
         switch (packetId) {
             case 0x00:
@@ -24,19 +27,22 @@ public abstract class DecodePacket {
 
     private static ServerboundPacket packet0(DataInputStream input, int len, Client client) throws IOException {
         if(client.data.state == 0) {
-            int protocol = VarReader.readVarInt(input);
+            int protocol = VarInt.readVarInt(input).getInt();
 
-            int adressSize = VarReader.readVarInt(input);
-            byte[] stringBytes = new byte[adressSize];
-            input.readFully(stringBytes);
-            String adress = new String(stringBytes, StandardCharsets.UTF_8);
+            String adress = VarString.readString(input).string;
 
             short port = input.readShort();
-            int state = VarReader.readVarInt(input);
+            int state = VarInt.readVarInt(input).getInt();
             return new ServerboundHandShake(len, protocol, adress, port, state);
         }
         if(client.data.state == 1) {
             return new ServerboundStatusRequest(len);
+        }
+        if(client.data.state == 2) {
+            String name = VarString.readString(input).string;
+            System.out.println(name);
+
+            return new ServerboundLoginStart(len, name, null);
         }
         return null;
     }

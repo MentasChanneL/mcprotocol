@@ -22,7 +22,7 @@ public class ClientboundPacket {
 
         VarInt packetLength = new VarInt( packet.length ) ;
         int pLLength = packetLength.getBytes().length;
-        byte[] dataToSend = new byte[packetLength.original + pLLength];
+        byte[] dataToSend = new byte[packetLength.getInt() + pLLength];
 
         System.arraycopy(packetLength.getBytes(), 0, dataToSend, 0, pLLength);
         System.arraycopy(packet, 0, dataToSend, pLLength, packet.length);
