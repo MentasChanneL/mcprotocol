@@ -5,16 +5,16 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-public class VarString implements Var {
-    public final VarInt VarIntLength;
-    public final byte[] stringBytes;
-    public final byte[] LengthAndString;
-    public final String string;
+public class PacketString implements PacketVariable {
+    private final PacketVarInt VarIntLength;
+    private final byte[] stringBytes;
+    private final byte[] LengthAndString;
+    private final String string;
 
-    public VarString(String string) {
+    public PacketString(String string) {
         this.string = string;
         this.stringBytes = string.getBytes(StandardCharsets.UTF_8);
-        this.VarIntLength = new VarInt(this.stringBytes.length);
+        this.VarIntLength = new PacketVarInt(this.stringBytes.length);
         int lenVarInt = this.VarIntLength.getBytes().length;
         int lenString = this.stringBytes.length;
         this.LengthAndString = new byte[lenVarInt + lenString];
@@ -22,15 +22,15 @@ public class VarString implements Var {
         System.arraycopy(this.stringBytes, 0, this.LengthAndString, lenVarInt, lenString);
     }
 
-    private VarString(VarInt VarIntLength, byte[] stringBytes, byte[] LengthAndString, String string) {
+    private PacketString(PacketVarInt VarIntLength, byte[] stringBytes, byte[] LengthAndString, String string) {
         this.string = string;
         this.VarIntLength = VarIntLength;
         this.stringBytes = stringBytes;
         this.LengthAndString = LengthAndString;
     }
 
-    public static VarString readString(DataInputStream input) throws IOException {
-        VarInt varSize = VarInt.readVarInt(input);
+    public static PacketString readString(DataInputStream input) throws IOException {
+        PacketVarInt varSize = PacketVarInt.readVarInt(input);
         int size = varSize.getInt();
         byte[] stringBytes = new byte[size];
         input.readFully(stringBytes);
@@ -39,7 +39,19 @@ public class VarString implements Var {
         bytes.write(varSize.getBytes());
         bytes.write(stringBytes);
         byte[] LengthAndString = bytes.toByteArray();
-        return new VarString(varSize, stringBytes, LengthAndString, string);
+        return new PacketString(varSize, stringBytes, LengthAndString, string);
+    }
+
+    public String getString() {
+        return this.string;
+    }
+
+    public PacketVarInt getLength() {
+        return this.VarIntLength;
+    }
+
+    public byte[] getStringBytes() {
+        return this.stringBytes;
     }
 
     @Override

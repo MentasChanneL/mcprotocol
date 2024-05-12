@@ -16,8 +16,8 @@ public class DefaultPacketHandler {
         if(serverboundPacket instanceof ServerboundHandShake) {
             if(client.data.state == 0) {
                 ServerboundHandShake handShake = (ServerboundHandShake) serverboundPacket;
-                client.data.state = handShake.state;
-                client.data.protocol = handShake.protocol;
+                client.data.state = handShake.state.getInt();
+                client.data.protocol = handShake.protocol.getInt();
             }
         }
     }

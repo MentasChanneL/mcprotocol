@@ -12,6 +12,7 @@ public class Server {
     public final ServerSocket serverSocket;
     public final Logger logger;
     public final int port;
+    public ServerRunnable handler;
 
     public Server(int port, boolean sendLogs, ServerRunnable handler) throws IOException {
         this.port = port;
@@ -20,6 +21,7 @@ public class Server {
         this.serverSocket = new ServerSocket( port );
         this.logger.logInfo("The server is running on the port " + port);
         handler.server = this;
+        this.handler = handler;
         this.thread = new Thread(handler);
         this.thread.start();
     }

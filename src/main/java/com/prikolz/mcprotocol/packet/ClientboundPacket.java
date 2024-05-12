@@ -1,26 +1,26 @@
 package com.prikolz.mcprotocol.packet;
 
-import com.prikolz.mcprotocol.packet.variable.Var;
-import com.prikolz.mcprotocol.packet.variable.VarInt;
+import com.prikolz.mcprotocol.packet.variable.PacketVariable;
+import com.prikolz.mcprotocol.packet.variable.PacketVarInt;
 
 public class ClientboundPacket {
 
     public byte[] bytes;
 
-    public static byte[] createPacket(Var... vars) {
+    public static byte[] createPacket(PacketVariable... vars) {
         int totalLength = 0;
-        for (Var var : vars) {
+        for (PacketVariable var : vars) {
             totalLength += var.getBytes().length;
         }
         byte[] packet = new byte[totalLength];
         int offset = 0;
-        for (Var var : vars) {
+        for (PacketVariable var : vars) {
             byte[] array = var.getBytes();
             System.arraycopy(array, 0, packet, offset, array.length);
             offset += array.length;
         }
 
-        VarInt packetLength = new VarInt( packet.length ) ;
+        PacketVarInt packetLength = new PacketVarInt( packet.length ) ;
         int pLLength = packetLength.getBytes().length;
         byte[] dataToSend = new byte[packetLength.getInt() + pLLength];
 

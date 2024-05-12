@@ -4,12 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public class VarInt implements Var {
+public class PacketVarInt implements PacketVariable {
 
-    public final byte[] bytes;
-    public final int value;
+    private final byte[] bytes;
+    private final int value;
 
-    public VarInt(int value) {
+    public PacketVarInt(int value) {
         this.value = value;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         do {
@@ -23,12 +23,12 @@ public class VarInt implements Var {
         this.bytes = baos.toByteArray();
     }
 
-    private VarInt(byte[] bytes, int value) {
+    private PacketVarInt(byte[] bytes, int value) {
         this.bytes = bytes;
         this.value = value;
     }
 
-    public static VarInt readVarInt(DataInputStream inputStream) throws IOException {
+    public static PacketVarInt readVarInt(DataInputStream inputStream) throws IOException {
         int numRead = 0;
         int original = 0;
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -43,7 +43,7 @@ public class VarInt implements Var {
                 throw new RuntimeException("VarInt is bigger");
             }
         } while ((read & 0b10000000) != 0);
-        return new VarInt(bytes.toByteArray(), original);
+        return new PacketVarInt(bytes.toByteArray(), original);
     }
 
     public int getInt() { return this.value; }
